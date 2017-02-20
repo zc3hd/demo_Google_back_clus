@@ -1,0 +1,291 @@
+<!doctype HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>详情页</title>
+<style>
+
+body {
+font-family: Tahoma;
+font-size: 10pt;
+/*line-height: 170%;*/
+padding-top: 10px;
+margin:0px;
+}
+/*------------------------------------------------------------侧边导航*/
+nav {
+background: gray;
+color: white;
+text-decoration: none;
+overflow-x: hidden;
+overflow-y: auto;
+position: fixed;
+top: 0;
+left: 0;
+bottom: 0;
+width: 200px;
+}
+nav a {
+	text-decoration: none;
+	color: white;
+}
+/*-------------------------------------------------------------标头*/
+@keyframes move {
+	0% {
+		text-shadow: 5px 0px 3px rgba(0,0,0,0.5);
+		transform: perspective(2000px) rotateY(0deg);
+	}
+	25% {
+		text-shadow: 20px 0px 5px rgba(0,0,0,.3);
+		transform: perspective(2000px) rotateY(40deg);
+	}
+	50% {
+		text-shadow: 5px 0px 5px rgba(0,0,0,.5);
+		transform: perspective(2000px) rotateY(0deg);
+	}
+	75% {
+		text-shadow: -20px 0px 5px rgba(0,0,0,.3);
+		transform: perspective(2000px) rotateY(-40deg);
+	}
+	100% {
+		text-shadow: 5px 0px 3px rgba(0,0,0,0.5);
+		transform: perspective(2000px) rotateY(0deg);
+	}
+}
+
+@keyframes moveX {
+	0% {
+		text-shadow: 0px 0px 3px rgba(0,0,0,0.5);
+		transform: perspective(2000px) rotateX(0deg);
+	}
+	25% {
+		text-shadow: 0px 10px 5px rgba(0,0,0,.3);
+		transform: perspective(2000px) rotateX(30deg);
+	}
+	50% {
+		text-shadow: 0px 0px 5px rgba(0,0,0,.5);
+		transform: perspective(2000px) rotateX(0deg);
+	}
+	75% {
+		text-shadow: 0px 10px 5px rgba(0,0,0,.3);
+		transform: perspective(2000px) rotateX(-30deg);
+	}
+	100% {
+		text-shadow: 0px 0px 3px rgba(0,0,0,0.5);
+		transform: perspective(2000px) rotateX(0deg);
+	}
+}
+
+
+header {
+padding-top: 10px;
+padding-left: 220px;
+font-size: 18px;
+position: absolute;
+/*margin-bottom:30px;*/
+text-shadow: 5px 0px 3px rgba(0,0,0,.3);
+color: black;
+}
+
+header h1 {
+	
+	margin:0px;
+	padding: 0px;
+	animation: move 6s forwards infinite;
+}
+/*----------------------------------------------------------主题*/
+article {
+margin-top: 80px;
+padding-left: 220px;
+}
+
+@keyframes imgMoveOver {
+	0% {
+		/*text-shadow: 5px 5px 3px rgba(0,0,0,0.5);*/
+		transform: scale(1) ;
+	}
+	100% {
+		/*text-shadow: 5px 5px 3px rgba(0,0,0,0.5);*/
+		/*transform: perspective(2000px) rotateY(30deg);*/
+		transform: scale(1.01) translateY(-2%);
+	}
+}
+
+@keyframes imgMoveOut {
+	0% {
+		/*text-shadow: 5px 5px 3px rgba(0,0,0,0.5);*/
+		
+		transform: scale(1.1) translateY(-5%);
+	}
+	100% {
+		/*text-shadow: 5px 5px 3px rgba(0,0,0,0.5);*/
+		/*transform: perspective(2000px) rotateY(30deg);*/
+		transform: scale(1) ;
+	}
+}
+
+img {
+	/*position: relative;*/
+	width: 900px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: Orange;
+	transform-origin:left top;
+}
+img:hover {
+	animation: imgMoveOver 0.5s forwards;
+}
+/*段落*/
+h3,h4{
+	/*background-color: rgba(0,0,0,.3);*/
+	background-image: linear-gradient(to right, rgba(0,0,0,1) 30%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.3) 65%, rgba(0,0,0,0.2) 75%, white 100%);
+/*	width: 500px;*/
+	color: white;
+	font-size: 22px;
+	padding-left: 10px;
+}
+h4{
+	width: 50%;
+	font-size: 18px;
+	margin-left: 5px;
+}
+pre {
+	background-color: black;
+}
+pre code {
+	color: yellow;
+	font-size: 16px;
+	font-weight: 500;
+}
+/*---------------------------------------------------------底部*/
+footer {
+padding-top: 10px;
+padding-left: 220px;
+padding-bottom: 10px;
+background-color: black;
+color: white;
+}
+footer h3 {
+	color: white;
+	background-color:transparent;
+	background-image: linear-gradient(to right, black 0%,  black 100%);
+}
+</style>
+</head>
+<body>
+
+<nav>
+<ul>
+<li class="level3"><a href="#0.1">1.运行</a></li><li class="level3"><a href="#0.2">2.项目说明</a></li><li class="level4"><a href="#0.2.1">2.1 控件栏渲染</a></li><li class="level4"><a href="#0.2.2">2.2 HTML渲染控件</a></li><li class="level4"><a href="#0.2.3">2.3 收集各层数据</a></li><li class="level4"><a href="#0.2.4">2.4 _clearOverlays：</a></li><li class="level4"><a href="#0.2.5">2.5 _setVeiwPort：</a></li><li class="level4"><a href="#0.2.6">2.6 收集轨迹线：</a></li><li class="level3"><a href="#0.3">3.思路及注意</a></li><li class="level3"><a href="#0.4">开源协议</a></li></ul>
+
+</nav>
+
+<header>
+<h1 id="-google_items_moniter-google-">四】Google_items_moniter google地图--后台聚合数据</h1>
+
+</header>
+
+<article>
+<h3 id="0.1">1.运行</h3>
+<pre><code>* $ git pull
+* $ gulp;
+</code></pre><h3 id="0.2">2.项目说明</h3>
+<ul>
+<li>此项目是 <a href="https://zc3hd.github.io/demo_Google_map_moniter_qu/">区监控--实时追踪</a> 的拓展模块，参照<a href="https://zc3hd.github.io/demo_BDmap_noWeb_clus/">省市区、监控、追踪5层数据，baidu模式</a>的代码写法敲出的google版。</li>
+<li>很多地方和baidu模式极其相似，因为这个项目涉及到地图模式的转换，最好代码风格保持一致。</li>
+</ul>
+<h4 id="0.2.1">2.1 控件栏渲染</h4>
+<ul>
+<li>首先进入页面是，项目控件栏（选择不同的项目），模式控件栏（聚合模式、普通模式）进行渲染。选择不同的项目，进行不同项目的渲染。</li>
+<li>直接说不同的地方吧，百度的自定义控件渲染时同步的，但是google这个控件自定义渲染尽然是异步。以至于我在一开始默认它是同步的，想给渲染的dom绑定属性和事件竟然特么的绑定不上去。(=@__@=)？</li>
+<li>baidu：自定义控件渲染为同步，属性和事件绑定都在渲染后进行。</li>
+</ul>
+<p><img src="./webapp/readme_img/001.jpg" alt=""></p>
+<ul>
+<li>google：自定义控件渲染为异步，迫使我把需要的属性绑定在渲染控件这个面向对象的内部了，这种写法其实很打脸。绑定事件也是在body上通过事件委托进行绑定</li>
+</ul>
+<p><img src="./webapp/readme_img/002.jpg" alt=""></p>
+<ul>
+<li>google自定义控件面向对象修改：</li>
+</ul>
+<p><img src="./webapp/readme_img/003.jpg" alt=""></p>
+<h4 id="0.2.2">2.2 HTML渲染控件</h4>
+<ul>
+<li>接下来用页面上写标签的方式，写完这个项目感觉其实这样的写法还是很不错，不仅不需要记录每次生成的按钮，dom操作无形中给生成和清除都特别方便。</li>
+</ul>
+<p><img src="./webapp/readme_img/004.jpg" alt=""></p>
+<p><img src="./webapp/readme_img/005.jpg" alt=""></p>
+<h4 id="0.2.3">2.3 收集各层数据</h4>
+<ul>
+<li>为什么要收集各层数据，还是归结到googleMap最大坑的地方，不自带获取地图全部覆盖物，不能清除页面所有覆盖物。</li>
+<li>构造函数的内部创建写各层数据的收集容器，作用是用于清除。</li>
+</ul>
+<p><img src="./webapp/readme_img/006.jpg" alt=""></p>
+<ul>
+<li>收集是把marker和label一起收集，因为google清除marker的同时还得清除label。变不变态，嘿嘿。</li>
+</ul>
+<p><img src="./webapp/readme_img/007.jpg" alt=""></p>
+<h4 id="0.2.4">2.4 _clearOverlays：</h4>
+<ul>
+<li>自己写清除地图上所有的覆盖物</li>
+</ul>
+<p><img src="./webapp/readme_img/008.jpg" alt=""></p>
+<h4 id="0.2.5">2.5 _setVeiwPort：</h4>
+<ul>
+<li>自己写最优显示所有点</li>
+</ul>
+<p><img src="./webapp/readme_img/009.jpg" alt=""></p>
+<h4 id="0.2.6">2.6 收集轨迹线：</h4>
+<ul>
+<li>轨迹线也要作为marker进行收集：</li>
+</ul>
+<p><img src="./webapp/readme_img/010.jpg" alt=""></p>
+<h3 id="0.3">3.思路及注意</h3>
+<ul>
+<li>聚合一层一层的进入和退出是难点。和百度一样。建议先进行百度地图同样模块的学习。</li>
+<li>google的自定义控件渲染时异步的。改变思路，写在HTML上操作DOM感觉还不错。</li>
+<li>没有相应API的时候，试着自己造出来它！google这里的_clearOverlays和_setVeiwPort都是自己造的，类似百度的同样的API。反正相互适应，相互抄袭吧。</li>
+<li>写业务需求的时候可以先在纸上把流程跑一遍，这样到了关键的地方，需要记录什么关键的obj和属性，心里有数，深层次的编辑也不会错。思维而且特别清楚。</li>
+<li>附一张我简单的流程图，圆圈表示在某一层的数据，旁边的方框代表需要退到上一层的返回按钮。这样我就很清楚我到了哪层怎么写。</li>
+</ul>
+<p><img src="./webapp/readme_img/011.jpg" alt=""></p>
+
+</article>
+<footer>
+<h3 id="0.4">开源协议</h3>
+<p>本程序基于MIT协议开源。</p>
+<pre><code>Copyright (c) cc.
+</code></pre>
+</footer>
+</body>
+
+<script>
+	var div = document.createElement("div"); 
+	var body = document.getElementsByTagName('body')[0];
+	console.log(body);
+div.id = 'back_index';	
+div.style.width = '200px';
+div.style.height = '200px';
+div.style.backgroundImage = "url(./back_index.png)";
+div.style.backgroundSize = 'cover';
+div.style.position = 'fixed';
+div.style.left = '0px';
+div.style.bottom = '20px';
+body.appendChild(div);
+document.write(div);
+div.onmouseover = function () {
+	/* body... */
+	div.style.animation = 'imgMoveOver 0.5s forwards';
+};
+div.onmouseout = function () {
+	/* body... */
+	div.style.animation = 'imgMoveOut 0.5s forwards';
+};
+div.onclick = function () {
+	/* body... */
+	window.location.href = "https://zc3hd.github.io/";
+};
+
+</script>
+
+</html>
