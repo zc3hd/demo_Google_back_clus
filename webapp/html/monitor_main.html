@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>google--省市区监控</title>
+  <!-- 谷歌地图 -->
+  <script src="http://maps.google.cn/maps/api/js?v=3&key=AIzaSyA3XWo-MAypDVLlJ4Eihb69FewgftvnvFo">
+  </script>
+  <!-- lib -->
+  <script src="../script/lib/jquery/jquery.js"></script>
+  <script src="../script/lib/Gmap_infoBubble/index.js"></script>
+  <script src="../script/module/monitor/map_GMap_DIYTools.js"></script>
+  <!-- 弹出层-->
+  <link rel="stylesheet" href="../script/lib/layer/skin/layer.css" />
+  <script type="text/javascript" src='../script/lib/layer/layer.js'></script>
+  <!-- DIY  Gmap -->
+  <script src='../script/module/monitor/map_GMap.js'>
+  </script>
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+  }
+  /*--------------------------------------marker 的标签*/
+  
+  .markLabel {
+    /*opacity: .80;*/
+    /*filter: alpha(opacity=80);*/
+    /*position: relative;*/
+    color: #FFF;
+    /*   top: 4px;*/
+    /*    background-color: #3b4139;
+    border: 1px solid #ffffff;
+    border-radius: 4px;*/
+    padding: 5px 20px;
+    min-width: 120px;
+    z-index: 1000
+  }
+  
+  .markLabel .labelName {
+    display: block;
+    text-align: center;
+    overflow: hidden;
+  }
+  
+  .markLabel .labelArrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    bottom: -7px;
+    left: 97px;
+    margin-left: -5px;
+    border-width: 8px 8px 0;
+    border-top-color: rgba(0, 0, 0, 0.3);
+  }
+  /*---------------------------------------------------------容器*/
+  
+  #contain {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  /*----------------------------------------------------------弹窗*/
+  
+  #select {
+    position: absolute;
+    height: 36px;
+    width: 200px;
+    border: 2px solid #21536d;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    background-color: white;
+    line-height: 36px;
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  .ck_parent {
+    margin-top: 5px;
+    margin-left: 50px;
+  }
+  
+  .p_ck_item {
+    font-size: 16px;
+    display: block;
+    height: 20px;
+  }
+  /*------------------------------------------------模式的选择样式*/
+  
+  .active {
+    background-color: #21536d!important;
+    color: white!important;
+  }
+  /*------------------------------------------------返回按钮的样式*/
+  
+  .back_btns {
+    position: absolute;
+    height: 36px;
+    /*width: 50px;*/
+    top: 10px;
+    left: 362px;
+    cursor: pointer;
+    background-color: white;
+    line-height: 36px;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  ._btns {
+    padding-left: 8px;
+    padding-right: 8px;
+    border: 2px solid #21536d;
+  }
+  /*---------------------------------------------------地图模式转换*/
+  
+  #convert_map {
+    position: absolute;
+    height: 36px;
+    width: 36px;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    border: 2px solid #21536d;
+  }
+  
+  #convert_map img {
+    width: 100%;
+    height: 100%;
+  }
+  
+  @keyframes move {
+    0% {
+      width: 36px;
+      height: 36px;
+      transform: perspective(300px) rotateY(0deg);
+    }
+    25% {
+      width: 45px;
+      height: 45px;
+      transform: perspective(300px) rotateY(45deg);
+    }
+    50% {
+      width: 54px;
+      height: 54px;
+      transform: perspective(300px) rotateY(0deg);
+    }
+    75% {
+      width: 63px;
+      height: 63px;
+      transform: perspective(300px) rotateY(-45deg);
+    }
+    100% {
+      width: 72px;
+      height: 72px;
+      transform: perspective(300px) rotateY(0deg);
+    }
+  }
+
+  @keyframes move_back {
+    0% {
+      width: 72px;
+      height: 72px;
+      transform: perspective(300px) rotateY(0deg);
+    }
+    25% {
+      width: 63px;
+      height: 63px;
+      transform: perspective(300px) rotateY(72deg);
+    }
+    50% {
+      width: 54px;
+      height: 54px;
+      transform: perspective(300px) rotateY(144deg);
+    }
+    75% {
+      width: 45px;
+      height: 45px;
+      transform: perspective(300px) rotateY(216deg);
+    }
+    100% {
+      width: 36px;
+      height: 36px;
+      transform: perspective(300px) rotateY(360deg);
+    }
+  }
+  
+  #convert_map:hover {
+    -webkit-animation: move 2s forwards !important;
+    -o-animation: move 2s forwards !important;
+    animation: move 2s forwards !important;
+  }
+  </style>
+</head>
+
+<body>
+  <div id='contain'>
+    <!-- 地图容器 -->
+    <div id="googleMap" style="width:100%;height:100%;position: absolute;"></div>
+    <!-- 弹窗进行多项 -->
+    <div id="select">项目选择</div>
+    <div class="back_btns">
+      <!-- <div id="dom_shen" class = "_btns">返回省</div> -->
+    </div>
+    <!-- 转换地图模式 -->
+    <div id="convert_map">
+      <img src="../images/baidu.jpg" alt="转换至【百度地图】模式">
+    </div>
+  </div>
+</body>
+<script>
+// 地图加载
+$(function() {
+  /* body... */
+  new diyGMap({
+    id: 'googleMap',
+  }).init()
+})
+</script>
+
+</html>
